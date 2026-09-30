@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="hero"><div><p class="eyebrow">FEEDBACK</p><h1>{{ participant.name }}</h1><p>{{ participant.event.title }}</p></div></section><section class="panel narrow"><form method="post">{% csrf_token %}{{ form.as_p }}<button class="button primary">Save feedback</button></form></section>{% endblock %}

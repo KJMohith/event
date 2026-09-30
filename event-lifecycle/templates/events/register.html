@@ -1,0 +1,2 @@
+{% extends 'base.html' %}
+{% block content %}<section class="hero"><div><p class="eyebrow">REGISTRATION</p><h1>Add participant</h1><p>Upload a receipt and photo, then the participant becomes part of the event workflow.</p></div></section><section class="panel narrow"><form method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button class="button primary">Register</button></form></section>{% endblock %}

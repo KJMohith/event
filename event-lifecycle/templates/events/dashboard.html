@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero"><div><p class="eyebrow">EVENT OPERATIONS</p><h1>Lifecycle dashboard</h1><p>Registration, attendance, feedback, marks and certificate issuance in one place.</p></div><a class="button primary" href="{% url 'register' %}">+ Register participant</a></section>
+<section class="stats"><div><b id="count-participants">0</b><span>Participants</span></div><div><b id="count-events">0</b><span>Events</span></div><div><b id="count-attended">0</b><span>Attended</span></div><div><b id="count-feedback">0</b><span>Feedback</span></div></section>
+<section class="grid">
+<div class="panel"><div class="panel-head"><h2>Add event</h2></div><form id="event-form">{% csrf_token %}{{ event_form.as_p }}<button class="button dark">Create event</button></form><div id="event-errors" class="errors"></div></div>
+<div class="panel"><div class="panel-head"><h2>Add participant</h2></div><form id="participant-form" enctype="multipart/form-data">{% csrf_token %}{{ participant_form.as_p }}<button class="button primary">Add participant</button></form><div id="participant-errors" class="errors"></div></div>
+</section>
+<section class="panel"><div class="panel-head"><h2>Events</h2><span class="muted">{{ events|length }} configured</span></div><div id="event-list" class="event-list">{% for event in events %}<div class="event" data-event-id="{{ event.id }}"><div><strong>{{ event.title }}</strong><small>{{ event.event_date }}{% if event.description %} · {{ event.description }}{% endif %}</small></div><button class="icon danger delete-event" data-url="{% url 'delete_event' event.id %}">Delete</button></div>{% empty %}<p class="muted">No events yet.</p>{% endfor %}</div></section>
+<section class="panel"><div class="panel-head"><h2>Participants</h2><span class="muted" id="participant-count-badge"></span></div><div class="table-wrap"><table><thead><tr><th>Participant</th><th>Event</th><th>Transaction</th><th>Attendance</th><th>Feedback</th><th>Marks</th><th>Actions</th><th>QR</th></tr></thead><tbody id="participant-table-body">{% include 'events/participant_rows.html' %}</tbody></table></div></section>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/dashboard.js' %}"></script>{% endblock %}

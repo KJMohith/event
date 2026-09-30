@@ -1,0 +1,14 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EventFlow</title>
+<link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<header class="topbar"><a href="{% url 'dashboard' %}" class="brand">⚡ EventFlow</a><nav><a href="{% url 'dashboard' %}">Dashboard</a><a href="{% url 'register' %}">Register</a></nav></header>
+<main class="container">{% block content %}{% endblock %}</main>
+<div id="toast"></div>
+{% block scripts %}{% endblock %}
+</body></html>
